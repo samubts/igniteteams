@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Alert } from 'react-native';
+import { useRef, useState } from 'react';
+import { Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { AppError } from '@utils/AppError';
@@ -16,6 +16,8 @@ export function NewGroup() {
   const [group, setGroup] = useState('');
 
   const navigation = useNavigation();
+
+  const newPlayerNameInputRef = useRef<TextInput>(null);
 
   async function handleNew() {
     try {
@@ -36,6 +38,7 @@ export function NewGroup() {
       } 
     }
   }
+
   return (
     <Container>
       <Header showBackButton />
@@ -49,6 +52,7 @@ export function NewGroup() {
         />
 
         <Input 
+          inputRef={newPlayerNameInputRef}
           placeholder='Nome da turma'
           onChangeText={setGroup}
         />
